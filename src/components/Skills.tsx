@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { Sword, Shield, ScrollText } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const skills = [
   { name: "Python", type: "blade", icon: <Sword /> },
@@ -15,6 +16,12 @@ const skills = [
 ];
 
 export default function Skills() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section className="section-container py-20 overflow-hidden">
       <div className="px-4 mb-12 text-center">
@@ -46,7 +53,7 @@ export default function Skills() {
 
             {/* Particle burst effect on hover (CSS only) */}
             <div className="absolute -z-10 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity">
-              {[...Array(6)].map((_, j) => (
+              {isMounted && [...Array(6)].map((_, j) => (
                 <div 
                   key={j}
                   className="absolute w-1 h-1 bg-gold rounded-full animate-ping"

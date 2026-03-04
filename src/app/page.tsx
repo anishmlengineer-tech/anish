@@ -4,15 +4,15 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 import dynamic from 'next/dynamic';
 import CustomCursor from '@/src/components/CustomCursor';
-import Hero from '@/src/components/Hero';
-import About from '@/src/components/About';
-import Skills from '@/src/components/Skills';
-import Projects from '@/src/components/Projects';
-import Certifications from '@/src/components/Certifications';
-import Contact from '@/src/components/Contact';
 
-// Dynamic import for the 3D scene to avoid SSR issues
+// Dynamic imports for sections to improve initial load and code splitting
 const Scene = dynamic(() => import('@/src/components/Scene'), { ssr: false });
+const Hero = dynamic(() => import('@/src/components/Hero'));
+const About = dynamic(() => import('@/src/components/About'));
+const Skills = dynamic(() => import('@/src/components/Skills'));
+const Projects = dynamic(() => import('@/src/components/Projects'));
+const Certifications = dynamic(() => import('@/src/components/Certifications'));
+const Contact = dynamic(() => import('@/src/components/Contact'));
 
 export default function Home() {
   useEffect(() => {

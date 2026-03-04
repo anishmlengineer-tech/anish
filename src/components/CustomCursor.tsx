@@ -5,12 +5,13 @@ import { motion } from 'motion/react';
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [trail, setTrail] = useState<{ x: number, y: number, id: number }[]>([]);
+  const [trail, setTrail] = useState<{ x: number, y: number, id: string }[]>([]);
 
   useEffect(() => {
+    let counter = 0;
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      setTrail(prev => [{ x: e.clientX, y: e.clientY, id: Date.now() }, ...prev].slice(0, 10));
+      setTrail(prev => [{ x: e.clientX, y: e.clientY, id: `${Date.now()}-${counter++}` }, ...prev].slice(0, 10));
     };
 
     window.addEventListener('mousemove', handleMouseMove);

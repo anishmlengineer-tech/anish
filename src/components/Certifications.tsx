@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 
 const certs = [
   { name: "AWS Cloud Practitioner", issuer: "Amazon" },
@@ -11,6 +12,12 @@ const certs = [
 ];
 
 export default function Certifications() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section className="section-container py-20 px-4 relative overflow-hidden">
       <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -27,12 +34,12 @@ export default function Certifications() {
                 delay: i * 0.2, 
                 duration: 2, 
                 ease: "easeOut",
-                y: {
+                y: isMounted ? {
                   repeat: Infinity,
                   repeatType: "reverse",
                   duration: 3 + Math.random() * 2,
                   ease: "easeInOut"
-                }
+                } : undefined
               }}
               className="w-40 h-56 bg-gold/10 border border-gold/30 rounded-t-full rounded-b-lg flex flex-col items-center justify-center p-4 group cursor-pointer relative"
             >
@@ -56,7 +63,7 @@ export default function Certifications() {
       </div>
 
       {/* Background Lanterns (Decorative) */}
-      {[...Array(10)].map((_, i) => (
+      {isMounted && [...Array(10)].map((_, i) => (
         <motion.div
           key={`bg-${i}`}
           animate={{ 

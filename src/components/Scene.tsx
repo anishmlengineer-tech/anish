@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Float, PerspectiveCamera } from '@react-three/drei';
-import * as THREE from 'three';
+import { Points, PointMaterial, PerspectiveCamera } from '@react-three/drei';
+import { AdditiveBlending, Points as ThreePoints, PerspectiveCamera as ThreePerspectiveCamera } from 'three';
 import gsap from 'gsap';
-import { useEffect } from 'react';
 
 function WindParticles() {
-  const ref = useRef<THREE.Points>(null);
+  const ref = useRef<ThreePoints>(null);
   const count = 400;
 
   const positions = useMemo(() => {
@@ -47,7 +46,7 @@ function WindParticles() {
         size={0.05}
         sizeAttenuation={true}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
       />
     </Points>
   );
@@ -84,7 +83,7 @@ function BambooGrove() {
 }
 
 function SceneContent() {
-  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+  const cameraRef = useRef<ThreePerspectiveCamera>(null);
 
   useEffect(() => {
     const handleScroll = () => {
